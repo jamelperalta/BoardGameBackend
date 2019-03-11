@@ -3,6 +3,7 @@ package boardgame.serverapplication;
 import static spark.Spark.*;
 
 import BoardGameFunc.BoardgameHandler;
+import UserFunc.UserHandler;
 
 /**
  * Main Class: The one that start the web application
@@ -21,7 +22,13 @@ public class App
 		/**
 		 *  ---------------------- BOARDGAMES ROUTES ---------------------------
 		 */
-		
+
+		// Route for getting board games in sales.
+		get("/getBoardGames", (request, response) -> {
+			BoardgameHandler handler = new BoardgameHandler();
+			return handler.getBoardgames();
+		});
+
 		// Route for getting board games in sales.
 		get("/getBoardGames/InSale", (request, response) -> {
 			BoardgameHandler handler = new BoardgameHandler();
@@ -34,13 +41,20 @@ public class App
 			return handler.getInRentBoardgames();
 		});
 		
+		// Route for getting board games owned by a user
+		get("/getBoardGames/byusername/:username", (request, response) -> {
+			BoardgameHandler handler = new BoardgameHandler();
+			return handler.getBoardgamesByUsername(request);
+		});
+		
 		/**
 		 *  ---------------------- USER ROUTES ---------------------------
 		 */
 
 		// Route for getting board games in rent.
-		get("/getUserInfo", (request, response) -> {
-			return "User Info";
+		get("/getUserInfo/:username", (request, response) -> {
+			UserHandler userhandler = new UserHandler();
+			return userhandler.getUserInfo(request);
 		});
 
 	}

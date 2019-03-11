@@ -7,11 +7,30 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class TestServer {
+	public static boolean authenticated;
 	
 	public static void main(String[] args) {
 		
 		// The server ip is http://localhost:4567/
 		
+		get("/login/username/:username/password/:password", (request, response) -> {
+		    // Show something
+			String output = "username: " + request.params(":username") 
+			+ ", password: " + request.params(":password");
+			return output;
+		});
+		
+		/**
+		before((request, response) -> {
+		    authenticated = false;
+		    // ... check if authenticated
+		    
+		    
+		    if (!authenticated) {
+		        halt(401, "You are not welcome here");
+		    }
+		});
+		*/
 		get("/get", (request, response) -> {
 		    // Show something
 			return "Hello Get";

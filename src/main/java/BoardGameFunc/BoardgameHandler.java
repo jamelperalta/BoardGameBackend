@@ -7,13 +7,47 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import Entities.BoardGame;
+import Entities.UserBoardGame;
+import spark.Request;
 
+/**
+ * BoardGame Handler: The class that manages all the data structure and convert to json
+ * Things related to board games.
+ * @author jamelperaltacoss, jorgecruz
+ *
+ */
 public class BoardgameHandler {
 	
 	// Constructor
 	public BoardgameHandler() {}
 	
 	// *********************** Methods ************************
+	
+	/*
+	 * For getting all the Board Games information.
+	 */
+	public String getBoardgames() {
+		
+		// Setting the DAO Component.
+		BoardGameDAO dao = new BoardGameDAO();
+
+		// Handling Error with try and catch
+		try {
+			
+			// Getting the List generated from the DAO
+			ArrayList<BoardGame> boardgames = dao.getBoardgames();
+			
+			// Converting from object to Json
+			GsonBuilder jsonBuilder = new GsonBuilder();
+			Gson jsonObj = jsonBuilder.create();
+			return jsonObj.toJson(boardgames);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "Error";
+		}
+	}
 	
 	/*
 	 * For getting all the Board Games that are in sale.
@@ -67,9 +101,36 @@ public class BoardgameHandler {
 		}
 	}
 	
-	
-	
-	
+	/*
+	 *  Forgetting the library of game owned by a username.
+	 */
+	public String getBoardgamesByUsername(Request request) {
+		// Setting the DAO Component.
+		BoardGameDAO dao = new BoardGameDAO();
+		
+		// Getting parameters
+		String username = request.params(":username");
+
+		// Handling Error with try and catch
+		try {
+
+			// Getting the List generated from the DAO
+			ArrayList<UserBoardGame> userBoardGames = dao.getBoardgamesByUsername(username);
+
+			// Converting from object to Json
+			GsonBuilder jsonBuilder = new GsonBuilder();
+			Gson jsonObj = jsonBuilder.create();
+			return jsonObj.toJson(userBoardGames);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "Error";
+		}
+	}
+
+
+
 	
 	
 	

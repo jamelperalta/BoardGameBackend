@@ -9,12 +9,12 @@ package Entities;
 public class UserBoardGame {
 
 	// Instance Variables
-	public String bg_id;
+	public String title;
 	public String description;
 	public String photo_url;
 	public String category_name;
 	public String category_desc;
-	public String quantity;	// This quantity is have much is owned.
+	public int quantity;	// This quantity is have much is owned.
 	public String publisher;
 	public float average_playtime;
 	public int max_player;
@@ -23,11 +23,11 @@ public class UserBoardGame {
 	public String transaction_date;
 
 	// Constructor
-	public UserBoardGame(String bg_id, String description, String photo_url, 
-			String category_name, String category_desc, String quantity, 
+	public UserBoardGame(String title, String description, String photo_url, 
+			String category_name, String category_desc, int quantity, 
 			String publisher, float average_playtime, int max_player, String username,
 			String transaction_type, String transaction_date) {
-		this.bg_id = bg_id;
+		this.title = title;
 		this.description = description;
 		this.photo_url = photo_url;
 		this.category_name = category_name;
@@ -38,7 +38,7 @@ public class UserBoardGame {
 		this.max_player = max_player;
 		this.username = username;
 		this.transaction_type = transaction_type;
-		this.transaction_date = transaction_type;
+		this.transaction_date = transaction_date;
 	}
 
 	// Methods
@@ -59,11 +59,11 @@ public class UserBoardGame {
 	}
 	
 	public String getBg_id() {
-		return bg_id;
+		return title;
 	}
 
 	public void setBg_id(String bg_id) {
-		this.bg_id = bg_id;
+		this.title = bg_id;
 	}
 
 	public String getDescription() {
@@ -98,11 +98,11 @@ public class UserBoardGame {
 		this.category_desc = category_desc;
 	}
 
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
