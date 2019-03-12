@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import Connectors.MySQLConnect;
 import Entities.User;
 import spark.Request;
 
@@ -44,7 +45,7 @@ public class UserHandler {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			// Return the prototype error type
-			return "Error";
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Custom 500\"}";
 		}
 	}
 }

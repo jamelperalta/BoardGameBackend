@@ -35,5 +35,12 @@ public class MySQLConnect {
 		return DriverManager.getConnection(serverData, account, pass);
 	}
 	
+	/**
+	 * ------------------------------- ERROR CODES MSG -----------------------------------------
+	 */
+	
+	public static final String ERROR500 = "Internal Server Error: Ther server is turn off or the SQL Query is wrong";
+	public static final String ERROR404 = "Not Found";
+	public static final String ERROR400 = "Mal functioning query";
 	
 }

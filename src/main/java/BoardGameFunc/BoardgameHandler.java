@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import Connectors.MySQLConnect;
 import Entities.BoardGame;
 import Entities.UserBoardGame;
 import spark.Request;
@@ -45,7 +46,7 @@ public class BoardgameHandler {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			// Return the prototype error type
-			return "Error";
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
 		}
 	}
 	
@@ -71,7 +72,7 @@ public class BoardgameHandler {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			// Return the prototype error type
-			return "Error";
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
 		}
 	}
 	
@@ -97,7 +98,7 @@ public class BoardgameHandler {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			// Return the prototype error type
-			return "Error";
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
 		}
 	}
 	
@@ -120,12 +121,17 @@ public class BoardgameHandler {
 			// Converting from object to Json
 			GsonBuilder jsonBuilder = new GsonBuilder();
 			Gson jsonObj = jsonBuilder.create();
-			return jsonObj.toJson(userBoardGames);
+			String jsonResult = jsonObj.toJson(userBoardGames);
+			
+			if(jsonResult != null)
+				return jsonResult;
+			else
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			// Return the prototype error type
-			return "Error";
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
 		}
 	}
 
