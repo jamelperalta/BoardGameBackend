@@ -35,17 +35,25 @@ public class UserHandler {
 		try {
 
 			// Getting the List generated from the DAO
-			User user = dao.getUserInfo(username);
+			User userInfo = dao.getUserInfo(username);
 
 			// Converting from object to Json
-			GsonBuilder jsonBuilder = new GsonBuilder();
-			Gson jsonObj = jsonBuilder.create();
-			return jsonObj.toJson(user);
+			String userInfoJSON = convertToJSON(userInfo);
+			return userInfoJSON;
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			// Return the prototype error type
 			return "{\"" + MySQLConnect.ERROR500 + "\":\"Custom 500\"}";
 		}
+	}
+	
+	/**
+	 * For converting from object to JSON
+	 */
+	private String convertToJSON(User usr) {
+		GsonBuilder jsonBuilder = new GsonBuilder();
+		Gson jsonObj = jsonBuilder.create();
+		return jsonObj.toJson(usr);
 	}
 }

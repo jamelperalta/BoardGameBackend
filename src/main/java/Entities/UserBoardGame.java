@@ -9,18 +9,18 @@ package Entities;
 public class UserBoardGame {
 
 	// Instance Variables
-	public String title;
-	public String description;
-	public String photo_url;
-	public String category_name;
-	public String category_desc;
-	public int quantity;	// This quantity is have much is owned.
-	public String publisher;
-	public float average_playtime;
-	public int max_player;
-	public String username;
-	public String transaction_type;
-	public String transaction_date;
+	private String title;
+	private String description;
+	private String photo_url;
+	private String category_name;
+	private String category_desc;
+	private int quantity;	// This quantity is have much is owned.
+	private String publisher;
+	private float average_playtime;
+	private int max_player;
+	private String username;
+	private String transaction_type;
+	private String transaction_date;
 
 	// Constructor
 	public UserBoardGame(String title, String description, String photo_url, 

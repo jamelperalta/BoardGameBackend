@@ -47,6 +47,18 @@ public class App
 			return handler.getBoardgamesByUsername(request);
 		});
 		
+		// Route for getting board games owned by a user
+		post("/buyBoardGames/byusername/:username/boardgameid/:bg_id/quantity/:quantity", (request, response) -> {
+			BoardgameHandler handler = new BoardgameHandler();
+			return handler.buyBoardgame(request);
+		});
+
+		// Route for getting board games owned by a user
+		post("/rentBoardGames/byusername/:username/boardgameid/:bg_id/quantity/:quantity", (request, response) -> {
+			BoardgameHandler handler = new BoardgameHandler();
+			return handler.rentBoardgame(request);
+		});
+		
 		/**
 		 *  ---------------------- USER ROUTES ---------------------------
 		 */

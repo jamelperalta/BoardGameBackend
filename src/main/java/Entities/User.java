@@ -9,9 +9,9 @@ package Entities;
 public class User {
 
 	// Instance Variables
-	public String name;
-	public String username;
-	public String email;
+	private String name;
+	private String username;
+	private String email;
 	
 	// Constructor
 	public User(String name, String username, String email) {
@@ -45,4 +45,17 @@ public class User {
 		this.email = email;
 	}
 	
+	/*
+	 * Return true if and only if the parameter wallet contains exactly the same bills 
+	 * as the target object.
+	 */
+	public boolean equals(Object o) {
+		if (o instanceof User) {
+			User usr = (User) o;
+			return ((this.name     == usr.getName()) &&
+					(this.username    == usr.getUsername()) &&
+					(this.email     == usr.getEmail()));
+		}
+		return false;
+	}
 }

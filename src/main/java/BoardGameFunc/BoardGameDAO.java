@@ -1,6 +1,7 @@
 package BoardGameFunc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 
 import Connectors.MySQLConnect;
 import Entities.BoardGame;
+import Entities.Transaction;
+import Entities.User;
 import Entities.UserBoardGame;
 
 /**
@@ -198,11 +201,78 @@ public class BoardGameDAO {
 		// Return list of objects
 		return userBoardGames;
 	}
+
+	/*
+	 *  For buying a board game
+	 */
+	public Boolean buyBoardgame(String username, int bg_id, int quantity) throws ClassNotFoundException, SQLException {
+		// Get the user id in the table
+		int u_id = this.getUserId(username);
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for transaction
+		String query = "insert into user_library(u_id, bg_id, quantity, transaction_type, transaction_date) \n" + 
+				"values(" + u_id
+				+ ", " + bg_id
+				+ ", " + quantity
+				+ ", 'owned', current_timestamp());";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		Boolean executed = insertQuery.execute();
+		
+		return executed;
+	}
 	
+	/*
+	 *  For renting a board game
+	 */
+	public Boolean rentBoardgame(String username, int bg_id, int quantity) throws ClassNotFoundException, SQLException {
+		// Get the user id in the table
+		int u_id = this.getUserId(username);
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for transaction
+		String query = "insert into user_library(u_id, bg_id, quantity, transaction_type, transaction_date) \n" + 
+				"values(" + u_id
+				+ ", " + bg_id
+				+ ", " + quantity
+				+ ", 'rented', current_timestamp());";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		Boolean executed = insertQuery.execute();
+		
+		return executed;
+	}
 	
-	
-	
-	
+	/*
+	 *  private function for looking for the user id.
+	 */
+	private int getUserId(String username) throws SQLException, ClassNotFoundException {
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query into the statement
+		Statement stmt = con.createStatement();
+		String query = "Select u_id from user where username = '" + username + "';";
+		ResultSet rs = stmt.executeQuery(query);
+
+		// Setting the result into Object.
+		int u_id = -1;
+		while(rs.next()) {
+			u_id = rs.getInt(1);
+		}
+
+		// Close the Connection
+		con.close();
+
+		// Return list of objects
+		return u_id;
+	}
 	
 	
 	

@@ -135,9 +135,65 @@ public class BoardgameHandler {
 		}
 	}
 
+	/*
+	 *  For buying a board game.
+	 */
+	public String buyBoardgame(Request request) {
+		// Setting the DAO Component.
+		BoardGameDAO dao = new BoardGameDAO();
+		
+		// Getting parameters
+		String username = request.params(":username");
+		int bg_id = Integer.parseInt(request.params(":bg_id"));
+		int quantity = Integer.parseInt(request.params(":quantity"));
 
+		// Handling Error with try and catch
+		try {
 
-	
+			// Getting the List generated from the DAO
+			Boolean executed = dao.buyBoardgame(username, bg_id, quantity);
+
+			if(!executed)
+				return "[done]";
+			else
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + "Transaction not made!" + "\":\"Error\"}";
+		}
+	}
+
+	/*
+	 *  For renting a board game.
+	 */
+	public String rentBoardgame(Request request) {
+		// Setting the DAO Component.
+		BoardGameDAO dao = new BoardGameDAO();
+		
+		// Getting parameters
+		String username = request.params(":username");
+		int bg_id = Integer.parseInt(request.params(":bg_id"));
+		int quantity = Integer.parseInt(request.params(":quantity"));
+
+		// Handling Error with try and catch
+		try {
+
+			// Getting the List generated from the DAO
+			Boolean executed = dao.rentBoardgame(username, bg_id, quantity);
+
+			if(!executed)
+				return "[done]";
+			else
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + "Transaction not made!" + "\":\"Error\"}";
+		}
+	}
 	
 	
 	
