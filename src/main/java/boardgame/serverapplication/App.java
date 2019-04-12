@@ -2,8 +2,8 @@ package boardgame.serverapplication;
 
 import static spark.Spark.*;
 
-import BoardGameFunc.BoardgameHandler;
-import UserFunc.UserHandler;
+import ApplicationLayer.BoardgameHandler;
+import ApplicationLayer.UserHandler;
 
 /**
  * Main Class: The one that start the web application
