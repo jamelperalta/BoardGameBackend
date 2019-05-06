@@ -93,6 +93,12 @@ public class App
 					BoardgameHandler handler = new BoardgameHandler();
 					return handler.getBoardgamesByUsername(request);
 				});
+				
+				// Route for getting board games transactions owned by a user
+				get("/getBoardGamesTransaction/byusername/:username", (request, response) -> {
+					BoardgameHandler handler = new BoardgameHandler();
+					return handler.getBoardgamesTransByUsername(request);
+				});
 
 				// Route for getting board games owned by a user
 				post("/buyBoardGames/byusername/:username/boardgameid/:bg_id/quantity/:quantity", (request, response) -> {

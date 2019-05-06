@@ -21,12 +21,13 @@ public class UserBoardGame {
 	private String username;
 	private String transaction_type;
 	private String transaction_date;
+	private int bg_id;
 
 	// Constructor
 	public UserBoardGame(String title, String description, String photo_url, 
 			String category_name, String category_desc, int quantity, 
 			String publisher, float average_playtime, int max_player, String username,
-			String transaction_type, String transaction_date) {
+			String transaction_type, String transaction_date, int bg_id) {
 		this.title = title;
 		this.description = description;
 		this.photo_url = photo_url;
@@ -39,6 +40,7 @@ public class UserBoardGame {
 		this.username = username;
 		this.transaction_type = transaction_type;
 		this.transaction_date = transaction_date;
+		this.bg_id = bg_id;
 	}
 
 	// Methods

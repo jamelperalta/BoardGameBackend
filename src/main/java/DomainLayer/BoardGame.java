@@ -9,20 +9,21 @@ package DomainLayer;
 public class BoardGame {
 
 	// Instance Variables
-	public String title;
-	public String description;
-	public String photo_url;
-	public String category_name;
-	public String category_desc;
-	public int quantity;	// This quantity can be for renting or for sale.
-	public String publisher;
-	public float average_playtime;
-	public int max_player;
+	private String title;
+	private String description;
+	private String photo_url;
+	private String category_name;
+	private String category_desc;
+	private int quantity;	// This quantity can be for renting or for sale.
+	private String publisher;
+	private float average_playtime;
+	private int max_player;
+	private int bg_id;
 	
 	// Constructor
 	public BoardGame(String title, String description, String photo_url, 
 			String category_name, String category_desc, int quantity, 
-			String publisher, float average_playtime, int max_player) {
+			String publisher, float average_playtime, int max_player, int bg_id) {
 		this.title = title;
 		this.description = description;
 		this.photo_url = photo_url;
@@ -32,6 +33,7 @@ public class BoardGame {
 		this.publisher = publisher;
 		this.average_playtime = average_playtime;
 		this.max_player = max_player;
+		this.bg_id = bg_id;
 	}
 
 	// Methods

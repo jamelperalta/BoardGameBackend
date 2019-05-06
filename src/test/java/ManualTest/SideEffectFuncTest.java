@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import DomainLayer.BoardGame;
 import DomainLayer.User;
 import DomainLayer.UserBoardGame;
 import InfrastructureLayer.BoardGameDAO;
@@ -23,7 +24,7 @@ public class SideEffectFuncTest {
 		try {
 
 			// Getting the List generated from the DAO
-			ArrayList<UserBoardGame> userBoardGames = dataAcessObject.getBoardgamesByUsername(username);
+			ArrayList<BoardGame> userBoardGames = dataAcessObject.getBoardgamesByUsername(username);
 
 			// Converting from object to Json
 			String jsonResult = convertToJSON(userBoardGames);

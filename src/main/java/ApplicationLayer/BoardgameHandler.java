@@ -96,7 +96,7 @@ public class BoardgameHandler {
 	}
 	
 	/*
-	 *  Forgetting the library of game owned by a username.
+	 *  For getting the library of game owned by a username.
 	 */
 	public String getBoardgamesByUsername(Request request) {
 		// Setting the DAO Component.
@@ -108,7 +108,36 @@ public class BoardgameHandler {
 		// Handling Error with try and catch
 		try {
 
-			ArrayList<UserBoardGame> userBoardGames = dataAcessObject.getBoardgamesByUsername(username);
+			ArrayList<BoardGame> userBoardGames = dataAcessObject.getBoardgamesByUsername(username);
+
+			String userLibraryInfoJSON = Utilities.convertToJSON(userBoardGames);
+			
+			if(userLibraryInfoJSON != null)
+				return userLibraryInfoJSON;
+			else
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
+		}
+	}
+	
+	/*
+	 *  For getting the transaction of game owned by a username.
+	 */
+	public String getBoardgamesTransByUsername(Request request) {
+		// Setting the DAO Component.
+		BoardGameDAO dataAcessObject = new BoardGameDAO();
+		
+		// Getting parameters
+		String username = request.params(":username");
+
+		// Handling Error with try and catch
+		try {
+
+			ArrayList<UserBoardGame> userBoardGames = dataAcessObject.getBoardgamesTransByUsername(username);
 
 			String userLibraryInfoJSON = Utilities.convertToJSON(userBoardGames);
 			
