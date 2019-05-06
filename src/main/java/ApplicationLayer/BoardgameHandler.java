@@ -143,7 +143,7 @@ public class BoardgameHandler {
 			Boolean executed = dataAcessObject.buyBoardgame(username, bg_id, quantity);
 
 			if(!executed)
-				return "[done]";
+				return "Done";
 			else
 				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
 
@@ -173,7 +173,7 @@ public class BoardgameHandler {
 			Boolean executed = dataAcessObject.rentBoardgame(username, bg_id, quantity);
 
 			if(!executed)
-				return "[done]";
+				return "Done";
 			else
 				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
 

@@ -219,9 +219,9 @@ public class BoardGameDAO {
 				+ ", " + quantity
 				+ ", 'owned', current_timestamp());";
 		PreparedStatement insertQuery = con.prepareStatement(query);
-		Boolean executed = insertQuery.execute();
+		insertQuery.execute();
 		
-		return executed;
+		return true;
 	}
 	
 	/*
@@ -242,9 +242,9 @@ public class BoardGameDAO {
 				+ ", " + quantity
 				+ ", 'rented', current_timestamp());";
 		PreparedStatement insertQuery = con.prepareStatement(query);
-		Boolean executed = insertQuery.execute();
+		insertQuery.execute();
 		
-		return executed;
+		return true;
 	}
 	
 	/*

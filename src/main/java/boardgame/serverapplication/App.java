@@ -17,12 +17,25 @@ public class App
 	{
 		
 		System.out.println("BOARDGAMES BACKEND SERVER APP: RUNNING");
-		// The server ip is http://localhost:4567/
+		// The server IP is http://localhost:4567/
 
 		// Route for getting board games in rent.
 		get("/login/username/:username/password/:password", (request, response) -> {
 			UserHandler userhandler = new UserHandler();
 			return userhandler.login(request);
+		});
+
+		// Route for getting board games in rent.
+		get("/availability/:username", (request, response) -> {
+			UserHandler userhandler = new UserHandler();
+			return userhandler.availability(request);
+		});
+
+		// Route for getting board games in rent.
+		get("/logon/name/:name/username/:username/email/:email/password/:password",
+				(request, response) -> {
+			UserHandler userhandler = new UserHandler();
+			return userhandler.createAccount(request);
 		});
 
 		/**
@@ -64,10 +77,6 @@ public class App
 			BoardgameHandler handler = new BoardgameHandler();
 			return handler.rentBoardgame(request);
 		});
-		
-		//signin  --- token jasonwebtoken jwt
-		//signup  --- username password
-		//authention --- 
 		
 		/**
 		 *  ---------------------- USER ROUTES ---------------------------
