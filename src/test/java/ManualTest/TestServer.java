@@ -27,6 +27,11 @@ public class TestServer {
 
 			path("/apiV2", () -> {
 
+				/**
+				 *  ----------------------
+				 *  
+				 */
+				
 				before("/*", (request, response) -> {
 					boolean authenticated = true;
 					// ... check if authenticated
