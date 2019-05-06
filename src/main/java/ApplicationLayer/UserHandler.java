@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import DomainLayer.Token;
 import DomainLayer.User;
 import InfrastructureLayer.MySQLConnect;
 import InfrastructureLayer.UserDAO;
@@ -49,5 +50,44 @@ public class UserHandler {
 			return "{\"" + MySQLConnect.ERROR500 + "\":\"Custom 500\"}";
 		}
 	}
+	
+	
+	public String login(Request request) {
+		// Setting the DAO Component.
+		UserDAO dataAcessObject = new UserDAO();
+		
+		// Get parameters
+		String username = request.params(":username");
+		String password = request.params("password");
+		
+		// Handling Error with try and catch
+		try {
+
+			// Getting the List generated from the DAO
+			Token token = dataAcessObject.login(username, password);
+
+			if (token == null)
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Custom 404\"}";
+			
+			// Converting from object to Json
+			String userInfoJSON = Utilities.convertToJSON(token);
+			return userInfoJSON;
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Custom 500\"}";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

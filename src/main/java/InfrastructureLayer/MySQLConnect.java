@@ -42,5 +42,6 @@ public class MySQLConnect {
 	public static final String ERROR500 = "Internal Server Error: Ther server is turn off or the SQL Query is wrong";
 	public static final String ERROR404 = "Not Found";
 	public static final String ERROR400 = "Mal functioning query";
+	public static final String ERROR401 = "Unauthorized";
 	
 }
