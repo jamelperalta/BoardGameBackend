@@ -48,7 +48,35 @@ public class BoardgameHandler {
 			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
 		}
 	}
-	
+
+	public String modifyBoardGameByid(Request request) {
+		// Setting the DAO Component.
+		BoardGameDAO dataAcessObject = new BoardGameDAO();
+
+		// Getting parameters
+		int bg_id = Integer.parseInt(request.params(":bg_id"));
+		String desc = request.params(":desc");
+		String publisher = request.params(":publisher");
+		float avg_time = Float.parseFloat(request.params(":avg_time"));
+		int max_player = Integer.parseInt(request.params(":max_player"));
+
+		// Handling Error with try and catch
+		try {
+
+			Boolean executed = dataAcessObject.modifyBoardGameByid(bg_id, desc, publisher, avg_time, max_player);
+
+			if(executed)
+				return "Done";
+			else
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Modification not made!\"}";
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + "SQL Error" + "\":\"Error\"}";
+		}
+	}
+
 	/*
 	 * For getting all the Board Games that are in sale.
 	 */

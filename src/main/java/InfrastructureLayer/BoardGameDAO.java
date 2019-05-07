@@ -67,7 +67,40 @@ public class BoardGameDAO {
 		// Return list of objects
 		return boardgames;
 	}
-	
+
+	/**
+	 * This method is to modify data from a specific board game.
+	 * @param bg_id
+	 * @param desc
+	 * @param publisher
+	 * @param avg_time
+	 * @param max_player
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public boolean modifyBoardGameByid(int bg_id, String desc, String publisher, float avg_time, int max_player) throws ClassNotFoundException, SQLException {
+
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for updating the board game data.
+		String query = "UPDATE boardgame SET "
+				+ "description = '" + desc
+				+ "', publisher = '" + publisher
+				+ "', average_playtime = " + avg_time
+				+ ", max_player = " + max_player
+				+ " where bg_id = " + bg_id + ";";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		insertQuery.execute();
+
+		// Close the Connection
+		con.close();
+
+		return true;
+	}
+
 	/**
 	 * This method is for gathering all the board game in sale.
 	 * @return boardgames list of board games
@@ -388,6 +421,8 @@ public class BoardGameDAO {
 				+ " where bg_id = " + bg_id + ";";
 		PreparedStatement insertQuery = con.prepareStatement(query);
 		insertQuery.execute();
+		
+		con.close();
 
 	}
 	
@@ -408,6 +443,7 @@ public class BoardGameDAO {
 		PreparedStatement insertQuery = con.prepareStatement(query);
 		insertQuery.execute();
 		
+		con.close();
 	}
 	
 	/*
@@ -511,6 +547,8 @@ public class BoardGameDAO {
 		PreparedStatement insertQuery = con.prepareStatement(query);
 		insertQuery.execute();
 
+		// Close the Connection
+		con.close();
 	}
 	
 	// increase in sale board game
@@ -529,9 +567,11 @@ public class BoardGameDAO {
 				+ " where bg_id = " + bg_id + ";";
 		PreparedStatement insertQuery = con.prepareStatement(query);
 		insertQuery.execute();
-		
+
+		// Close the Connection
+		con.close();
 	}
-	
+
 	/**
 	 * This method is for gathering all the board games for a particular username.
 	 * @return userboardgames list of user board games

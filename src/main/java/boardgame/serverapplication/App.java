@@ -79,6 +79,13 @@ public class App
 					response.header("Access-Control-Allow-Origin", "http://localhost:3000");
 					return handler.getBoardgames();
 				});
+				
+				// Route for getting board games in sales.
+				put("/editBoardGames/boardgameid/:bg_id/desc/:desc/publisher/:publisher/avg_time/:avg_time/max_player/:max_player", (request, response) -> {
+					BoardgameHandler handler = new BoardgameHandler();
+					response.header("Access-Control-Allow-Origin", "http://localhost:3000");
+					return handler.modifyBoardGameByid(request);
+				});
 
 				// Route for getting board games in sales.
 				get("/getBoardGames/InSale", (request, response) -> {
