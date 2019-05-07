@@ -181,6 +181,36 @@ public class UserDAO {
 		return false;
 	}
 	
+	/**
+	 * Delete Account from the database.
+	 * @param username
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public boolean deleteAccount(String username) throws ClassNotFoundException, SQLException {
+		if(this.availabilityUsername(username))
+			return false;
+
+		// Getting the userid
+		int u_id = this.getUserId(username);
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// delete query for password table
+		String query = "delete from passwords where u_id = " + u_id + ";";
+		PreparedStatement passwordQuery = con.prepareStatement(query);
+		passwordQuery.execute();
+
+		// delete query for user table
+		query = "delete from user where u_id = " + u_id + ";";
+		PreparedStatement accountQuery = con.prepareStatement(query);
+		accountQuery.execute();
+
+		return true;
+	}
 	
 	/*
 	 *  private function for looking for the user id.

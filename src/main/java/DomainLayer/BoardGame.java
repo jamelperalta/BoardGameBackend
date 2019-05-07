@@ -19,7 +19,7 @@ public class BoardGame {
 	private float average_playtime;
 	private int max_player;
 	private int bg_id;
-	
+
 	// Constructor
 	public BoardGame(String title, String description, String photo_url, 
 			String category_name, String category_desc, int quantity, 
@@ -46,6 +46,22 @@ public class BoardGame {
 				+ "]";
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getBg_id() {
+		return bg_id;
+	}
+
+	public void setBg_id(int bg_id) {
+		this.bg_id = bg_id;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -109,4 +125,19 @@ public class BoardGame {
 	public void setMax_player(int max_player) {
 		this.max_player = max_player;
 	}
+	
+	public boolean equalTo(BoardGame bg) {
+		if (this.title.equals(bg.getTitle())
+				&& this.description.equals(bg.getDescription())
+				&& this.photo_url.equals(bg.getPhoto_url())
+				&& this.category_name.equals(bg.getCategory_name())
+				&& this.quantity == bg.getQuantity()
+				&& this.publisher.equals(bg.getPublisher())
+				&& this.average_playtime == bg.getAverage_playtime()
+				&& this.max_player == bg.getMax_player()
+				&& this.bg_id == bg.getBg_id())
+			return true;
+		return false;
+	}
+	
 }
