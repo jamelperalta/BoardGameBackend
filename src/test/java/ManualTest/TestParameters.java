@@ -24,7 +24,7 @@ public class TestParameters {
 		*/
 		
 		try {
-			System.out.println(dao.getInRentBoardgame(2));
+			dao.increaseInRentBG(2);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

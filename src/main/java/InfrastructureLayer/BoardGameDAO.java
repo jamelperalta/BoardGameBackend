@@ -310,10 +310,14 @@ public class BoardGameDAO {
 				+ ", 'owned', current_timestamp());";
 		PreparedStatement insertQuery = con.prepareStatement(query);
 		insertQuery.execute();
-		
+
+		// decrease inventory
+		this.decreaseInSaleBG(bg_id);
+
 		return true;
 	}
 	
+	// true if available false is not available.
 	public boolean availableInSaleBG(int bg_id) throws ClassNotFoundException, SQLException {
 		// Values
 		int quantity = 0;
@@ -343,6 +347,69 @@ public class BoardGameDAO {
 		return false;
 	}
 	
+	public int qtyInSaleBG(int bg_id) throws ClassNotFoundException, SQLException {
+		// Values
+		int quantity = 0;
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query into the statement
+		Statement stmt = con.createStatement();
+		String query = "SELECT title, quantity FROM sale_boardgames"
+				+ " natural join boardgame where bg_id = " + bg_id + ";";
+		ResultSet rs = stmt.executeQuery(query);
+
+		// Setting the result into Object.
+		while(rs.next()) {
+			quantity = rs.getInt(2);
+		}
+
+		// Close the Connection
+		con.close();
+		
+		return quantity;
+	}
+	
+	// decrease in sale board game.
+	public void decreaseInSaleBG(int bg_id) throws ClassNotFoundException, SQLException {
+		
+		// Get quantity
+		int quantity = this.qtyInSaleBG(bg_id);
+		quantity--;
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for transaction
+		String query = "update sale_boardgames set quantity = " + quantity
+				+ " where bg_id = " + bg_id + ";";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		insertQuery.execute();
+
+	}
+	
+	// increase in sale board game
+	public void increaseInSaleBG(int bg_id) throws ClassNotFoundException, SQLException {
+		
+		// Get quantity
+		int quantity = this.qtyInSaleBG(bg_id);
+		quantity++;
+
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for transaction
+		String query = "update sale_boardgames set quantity = " + quantity
+				+ " where bg_id = " + bg_id + ";";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		insertQuery.execute();
+		
+	}
+	
 	/*
 	 *  For renting a board game
 	 */
@@ -366,6 +433,9 @@ public class BoardGameDAO {
 				+ ", 'rented', current_timestamp());";
 		PreparedStatement insertQuery = con.prepareStatement(query);
 		insertQuery.execute();
+		
+		// decrease inventory
+		this.decreaseInRentBG(bg_id);
 		
 		return true;
 	}
@@ -392,11 +462,74 @@ public class BoardGameDAO {
 		// Close the Connection
 		con.close();
 
-		// Qunatity must be greater than 0 in order to be available.
+		// Quantity must be greater than 0 in order to be available.
 		if(quantity > 0)
 			return true;
 
 		return false;
+	}
+	
+	public int qtyInRentBG(int bg_id) throws ClassNotFoundException, SQLException {
+		// Values
+		int quantity = 0;
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query into the statement
+		Statement stmt = con.createStatement();
+		String query = "SELECT title, quantity FROM rent_boardgames"
+				+ " natural join boardgame where bg_id = " + bg_id + ";";
+		ResultSet rs = stmt.executeQuery(query);
+
+		// Setting the result into Object.
+		while(rs.next()) {
+			quantity = rs.getInt(2);
+		}
+
+		// Close the Connection
+		con.close();
+		
+		return quantity;
+	}
+	
+	// decrease in sale board game.
+	public void decreaseInRentBG(int bg_id) throws ClassNotFoundException, SQLException {
+		
+		// Get quantity
+		int quantity = this.qtyInRentBG(bg_id);
+		quantity--;
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for transaction
+		String query = "update rent_boardgames set quantity = " + quantity
+				+ " where bg_id = " + bg_id + ";";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		insertQuery.execute();
+
+	}
+	
+	// increase in sale board game
+	public void increaseInRentBG(int bg_id) throws ClassNotFoundException, SQLException {
+		
+		// Get quantity
+		int quantity = this.qtyInRentBG(bg_id);
+		quantity++;
+
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query for transaction
+		String query = "update rent_boardgames set quantity = " + quantity
+				+ " where bg_id = " + bg_id + ";";
+		PreparedStatement insertQuery = con.prepareStatement(query);
+		insertQuery.execute();
+		
 	}
 	
 	/**
