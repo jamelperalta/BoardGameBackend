@@ -13,8 +13,18 @@ public class TestParameters {
 		//Date date = 
 		
 		BoardGameDAO dao = new BoardGameDAO();
+		
+		/*
 		try {
 			System.out.println(dao.availableInRentBG(1));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		try {
+			System.out.println(dao.getInRentBoardgame(2));
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

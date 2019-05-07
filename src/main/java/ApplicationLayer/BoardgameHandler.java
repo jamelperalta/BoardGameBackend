@@ -73,6 +73,32 @@ public class BoardgameHandler {
 	}
 	
 	/*
+	 * For getting all info on a Board Games that is in sale.
+	 */
+	public String getInSaleBoardgame(Request request) {
+		
+		// Setting the DAO Component.
+		BoardGameDAO dataAcessObject = new BoardGameDAO();
+
+		// Getting parameters
+		int bg_id = Integer.parseInt(request.params(":bg_id"));
+
+		// Handling Error with try and catch
+		try {
+			
+			BoardGame onSaleBoardGame = dataAcessObject.getInSaleBoardgame(bg_id);
+			
+			String saleBoardgamesInfoJSON = Utilities.convertToJSON(onSaleBoardGame);
+			return saleBoardgamesInfoJSON;
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
+		}
+	}
+	
+	/*
 	 * For getting all the Board Games that are in rent.
 	 */
 	public String getInRentBoardgames() {
@@ -87,6 +113,32 @@ public class BoardgameHandler {
 
 			String rentBoardgamesInfoJSON = Utilities.convertToJSON(onRentBoardGames);
 			return rentBoardgamesInfoJSON;
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			// Return the prototype error type
+			return "{\"" + MySQLConnect.ERROR500 + "\":\"Error 500\"}";
+		}
+	}
+	
+	/*
+	 * For getting all info on a Board Games that is in sale.
+	 */
+	public String getInRentBoardgame(Request request) {
+		
+		// Setting the DAO Component.
+		BoardGameDAO dataAcessObject = new BoardGameDAO();
+
+		// Getting parameters
+		int bg_id = Integer.parseInt(request.params(":bg_id"));
+
+		// Handling Error with try and catch
+		try {
+			
+			BoardGame onSaleBoardGame = dataAcessObject.getInRentBoardgame(bg_id);
+			
+			String saleBoardgamesInfoJSON = Utilities.convertToJSON(onSaleBoardGame);
+			return saleBoardgamesInfoJSON;
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
