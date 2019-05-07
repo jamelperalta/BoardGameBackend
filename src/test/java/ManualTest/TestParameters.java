@@ -1,5 +1,8 @@
 package ManualTest;
 
+import java.sql.SQLException;
+
+import InfrastructureLayer.BoardGameDAO;
 import spark.Request;
 
 public class TestParameters {
@@ -8,5 +11,13 @@ public class TestParameters {
 		//System.out.println(req.params(":jamel"));
 		
 		//Date date = 
+		
+		BoardGameDAO dao = new BoardGameDAO();
+		try {
+			System.out.println(dao.availableInRentBG(1));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

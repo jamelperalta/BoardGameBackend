@@ -171,10 +171,10 @@ public class BoardgameHandler {
 			// Getting the List generated from the DAO
 			Boolean executed = dataAcessObject.buyBoardgame(username, bg_id, quantity);
 
-			if(!executed)
+			if(executed)
 				return "Done";
 			else
-				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Not Found or unavailable resource.\"}";
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -201,10 +201,10 @@ public class BoardgameHandler {
 			// Getting the List generated from the DAO
 			Boolean executed = dataAcessObject.rentBoardgame(username, bg_id, quantity);
 
-			if(!executed)
+			if(executed)
 				return "Done";
 			else
-				return "{\"" + MySQLConnect.ERROR404 + "\":\"Error 404\"}";
+				return "{\"" + MySQLConnect.ERROR404 + "\":\"Not Found or unavailable resource.\"}";
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

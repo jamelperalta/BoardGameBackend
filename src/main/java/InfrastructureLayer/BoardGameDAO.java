@@ -205,6 +205,10 @@ public class BoardGameDAO {
 	 *  For buying a board game
 	 */
 	public Boolean buyBoardgame(String username, int bg_id, int quantity) throws ClassNotFoundException, SQLException {
+		// Check if available
+		if(!this.availableInSaleBG(bg_id))
+			return false;
+
 		// Get the user id in the table
 		int u_id = this.getUserId(username);
 		
@@ -224,10 +228,43 @@ public class BoardGameDAO {
 		return true;
 	}
 	
+	public boolean availableInSaleBG(int bg_id) throws ClassNotFoundException, SQLException {
+		// Values
+		int quantity = 0;
+		
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query into the statement
+		Statement stmt = con.createStatement();
+		String query = "SELECT title, quantity FROM sale_boardgames"
+				+ " natural join boardgame where bg_id = " + bg_id + ";";
+		ResultSet rs = stmt.executeQuery(query);
+
+		// Setting the result into Object.
+		while(rs.next()) {
+			quantity = rs.getInt(2);
+		}
+
+		// Close the Connection
+		con.close();
+		
+		// Qunatity must be greater than 0 in order to be available.
+		if(quantity > 0)
+			return true;
+		
+		return false;
+	}
+	
 	/*
 	 *  For renting a board game
 	 */
 	public Boolean rentBoardgame(String username, int bg_id, int quantity) throws ClassNotFoundException, SQLException {
+		// Check if available
+		if(!this.availableInRentBG(bg_id))
+			return false;
+		
 		// Get the user id in the table
 		int u_id = this.getUserId(username);
 		
@@ -245,6 +282,35 @@ public class BoardGameDAO {
 		insertQuery.execute();
 		
 		return true;
+	}
+
+	public boolean availableInRentBG(int bg_id) throws ClassNotFoundException, SQLException {
+		// Values
+		int quantity = 0;
+
+		// Setting the connection
+		Connection con = MySQLConnect.getConnection(MySQLConnect.SERVER_IP_PORT, MySQLConnect.BG_SCHEMA,
+				MySQLConnect.ROOTACCOUNT, MySQLConnect.ACCOUNTPASSWORD);
+
+		// Query into the statement
+		Statement stmt = con.createStatement();
+		String query = "SELECT title, quantity FROM rent_boardgames"
+				+ " natural join boardgame where bg_id = " + bg_id + ";";
+		ResultSet rs = stmt.executeQuery(query);
+
+		// Setting the result into Object.
+		while(rs.next()) {
+			quantity = rs.getInt(2);
+		}
+
+		// Close the Connection
+		con.close();
+
+		// Qunatity must be greater than 0 in order to be available.
+		if(quantity > 0)
+			return true;
+
+		return false;
 	}
 	
 	/**

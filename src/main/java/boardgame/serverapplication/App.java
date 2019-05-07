@@ -39,7 +39,7 @@ public class App
 				});
 
 				// Route for getting board games in rent.
-				get("/logon/name/:name/username/:username/email/:email/password/:password",
+				post("/logon/name/:name/username/:username/email/:email/password/:password",
 						(request, response) -> {
 							UserHandler userhandler = new UserHandler();
 							return userhandler.createAccount(request);
