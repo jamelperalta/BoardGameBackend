@@ -74,7 +74,5 @@ public class Token {
 		return "Token [token=" + token + "]";
 	}
 	
-	
-	
 
 }

@@ -3,9 +3,6 @@ package ApplicationLayer;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import DomainLayer.BoardGame;
 import DomainLayer.UserBoardGame;
 import InfrastructureLayer.BoardGameDAO;
@@ -31,7 +28,6 @@ public class BoardgameHandler {
 	 */
 	public String getBoardgames() {
 		
-		// Setting the DAO Component.
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 
 		// Handling Error with try and catch
@@ -50,7 +46,7 @@ public class BoardgameHandler {
 	}
 
 	public String modifyBoardGameByid(Request request) {
-		// Setting the DAO Component.
+		
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 
 		// Getting parameters
@@ -82,7 +78,6 @@ public class BoardgameHandler {
 	 */
 	public String getInSaleBoardgames() {
 		
-		// Setting the DAO Component.
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 
 		// Handling Error with try and catch
@@ -105,7 +100,6 @@ public class BoardgameHandler {
 	 */
 	public String getInSaleBoardgame(Request request) {
 		
-		// Setting the DAO Component.
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 
 		// Getting parameters
@@ -131,7 +125,6 @@ public class BoardgameHandler {
 	 */
 	public String getInRentBoardgames() {
 
-		// Setting the DAO Component.
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 
 		// Handling Error with try and catch
@@ -154,7 +147,6 @@ public class BoardgameHandler {
 	 */
 	public String getInRentBoardgame(Request request) {
 		
-		// Setting the DAO Component.
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 
 		// Getting parameters
@@ -179,7 +171,7 @@ public class BoardgameHandler {
 	 *  For getting the library of game owned by a username.
 	 */
 	public String getBoardgamesByUsername(Request request) {
-		// Setting the DAO Component.
+		
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 		
 		// Getting parameters
@@ -208,7 +200,7 @@ public class BoardgameHandler {
 	 *  For getting the transaction of game owned by a username.
 	 */
 	public String getBoardgamesTransByUsername(Request request) {
-		// Setting the DAO Component.
+		
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 		
 		// Getting parameters
@@ -237,7 +229,7 @@ public class BoardgameHandler {
 	 *  For buying a board game.
 	 */
 	public String buyBoardgame(Request request) {
-		// Setting the DAO Component.
+		
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 		
 		// Getting parameters
@@ -267,7 +259,7 @@ public class BoardgameHandler {
 	 *  For renting a board game.
 	 */
 	public String rentBoardgame(Request request) {
-		// Setting the DAO Component.
+		
 		BoardGameDAO dataAcessObject = new BoardGameDAO();
 		
 		// Getting parameters
@@ -293,10 +285,7 @@ public class BoardgameHandler {
 		}
 	}
 	
-	
-	
-	
-	
+
 	
 	
 	

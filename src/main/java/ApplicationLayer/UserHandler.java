@@ -3,8 +3,6 @@ package ApplicationLayer;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.sql.SQLException;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import DomainLayer.Token;
 import DomainLayer.User;
@@ -30,7 +28,7 @@ public class UserHandler {
 	 * For getting all information on a certain username.
 	 */
 	public String getUserInfo(Request request) {
-		// Setting the DAO Component.
+		
 		UserDAO dataAcessObject = new UserDAO();
 		
 		// Get parameters
@@ -39,10 +37,8 @@ public class UserHandler {
 		// Handling Error with try and catch
 		try {
 
-			// Getting the List generated from the DAO
 			User userInfo = dataAcessObject.getUserInfo(username);
 
-			// Converting from object to Json
 			String userInfoJSON = Utilities.convertToJSON(userInfo);
 			return userInfoJSON;
 
@@ -57,7 +53,7 @@ public class UserHandler {
 	 * For loging into the api and getting a token
 	 */
 	public String login(Request request) {
-		// Setting the DAO Component.
+		
 		UserDAO dataAcessObject = new UserDAO();
 		
 		// Get parameters
@@ -67,13 +63,11 @@ public class UserHandler {
 		// Handling Error with try and catch
 		try {
 
-			// Getting the List generated from the DAO
 			Token token = dataAcessObject.login(username, password);
 
 			if (token == null)
 				return "{\"" + MySQLConnect.ERROR404 + "\":\"Custom 404\"}";
 			
-			// Converting from object to Json
 			String tokenJSON = Utilities.convertToJSON(token);
 			return tokenJSON;
 
@@ -88,7 +82,7 @@ public class UserHandler {
 	 * For checking whether the username provided exist or not
 	 */
 	public String availability(Request request) {
-		// Setting the DAO Component.
+		
 		UserDAO dataAcessObject = new UserDAO();
 
 		// Get parameters
@@ -97,7 +91,6 @@ public class UserHandler {
 		// Handling Error with try and catch
 		try {
 
-			// Getting the List generated from the DAO
 			boolean available = dataAcessObject.availabilityUsername(username);
 
 			String availability = "yes";
@@ -116,7 +109,7 @@ public class UserHandler {
 	}
 
 	public String createAccount(Request request) {
-		// Setting the DAO Component.
+		
 		UserDAO dataAcessObject = new UserDAO();
 
 		// Get parameters
@@ -125,13 +118,11 @@ public class UserHandler {
 		String email = request.params(":email");
 		String password = request.params(":password");
 		
-		// Create Object
 		User user = new User(name, username, email);
 
 		// Handling Error with try and catch
 		try {
 
-			// Getting the List generated from the DAO
 			boolean executed = dataAcessObject.createAccount(user, password);
 
 			if(executed)

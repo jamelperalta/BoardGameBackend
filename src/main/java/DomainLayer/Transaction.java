@@ -8,14 +8,14 @@ package DomainLayer;
  */
 public class Transaction {
 	
-	// Instance Variables
+	// Instance Variables 
 	private int lib_id;
 	private int u_id;
 	private int bg_id;
 	private String transaction_type;
 	private String transaction_date;
 	
-	// Constructor
+	// Constructor 
 	public Transaction(int lib_id, int u_id, int bg_id,
 			String trans_type, String trans_date) {
 		this.lib_id = lib_id;
@@ -25,7 +25,7 @@ public class Transaction {
 		this.transaction_type = trans_type;
 	}
 
-	// Setters and Getters
+	// Setters and Getters 
 	public int getLib_id() {
 		return lib_id;
 	}

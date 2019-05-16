@@ -25,7 +25,7 @@ class UserDAOTest {
 	 * 
 	 */
 	
-	/*
+	/* 
 	 * A integration test for checking whether an account is created
 	 * and verifying if exist in the database
 	 */
